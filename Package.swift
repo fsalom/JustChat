@@ -4,42 +4,42 @@
 import PackageDescription
 
 let package = Package(
-    name: "justchat",
+    name: "JustChat",
     platforms: [.iOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "justchat",
-            targets: ["justchat"]),
+            name: "JustChat",
+            targets: ["JustChat"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "Firebase", url: "https://github.com/firebase/firebase-ios-sdk.git", branch: "master")
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", branch: "master")
       ],
       targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-          name: "justchat",
+          name: "JustChat",
           dependencies: [
-            .product(name: "FirebaseAnalytics", package: "Firebase"),
-            .product(name: "FirebaseAuth", package: "Firebase"),
-            .product(name: "FirebaseAppCheck", package: "Firebase"),
-            .product(name: "FirebaseCrashlytics", package: "Firebase"),
-            .product(name: "FirebaseDatabase", package: "Firebase"),
-            .product(name: "FirebaseDynamicLinks", package: "Firebase"),
-            .product(name: "FirebaseFirestore", package: "Firebase"),
-            .product(name: "FirebaseFunctions", package: "Firebase"),
-            .product(name: "FirebaseInstallations", package: "Firebase"),
-            .product(name: "FirebaseMessaging", package: "Firebase"),
-            .product(name: "FirebaseMLModelDownloader", package: "Firebase"),
-            .product(name: "FirebasePerformance", package: "Firebase"),
-            .product(name: "FirebaseRemoteConfig", package: "Firebase"),
-            .product(name: "FirebaseStorage", package: "Firebase"),
+            .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseAuth", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseAppCheck", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseDatabase", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseDynamicLinks", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseFirestore", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseFunctions", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseInstallations", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseMLModelDownloader", package: "firebase-ios-sdk"),
+            .product(name: "FirebasePerformance", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
+            .product(name: "FirebaseStorage", package: "firebase-ios-sdk"),
           ]),
         .testTarget(
-            name: "justchatTests",
-            dependencies: ["justchat"]),
+            name: "JustChatTests",
+            dependencies: ["JustChat"]),
     ]
 )

@@ -1,8 +1,11 @@
-
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 public class JustChatManager {
-    public private(set) var text = "Hello, World!"
-
+    var shared = JustChatManager()
+    
     public init() {
+        FirebaseApp.configure()
     }
 }
