@@ -1,18 +1,17 @@
-import FirebaseCore
-import FirebaseFirestore
-import FirebaseAuth
-
 public class JustChatManager {
     var dataSource: DataSourceProtocol
 
     public init(with dataSource: DataSourceProtocol) {
         self.dataSource = dataSource
-        FirebaseApp.configure()
+        self.initialization()
     }
-
 }
 
 extension JustChatManager: DataSourceProtocol {
+    public func initialization() {
+        self.dataSource.initialization()
+    }
+
     public func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
         do {
             return try await self.dataSource.getChats(with: parameters)
