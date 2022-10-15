@@ -6,8 +6,9 @@ import FirebaseDatabase
 class FirebaseDataSource {
     var chatReference: String
     var ref: DatabaseReference! = Database.database().reference()
-    var completionChats: ([ChatProtocol]) -> Void?
-    var completionCurrentChat: ([ChatMessageProtocol]) -> Void?
+    var completionChats: (([ChatProtocol]) -> Void)?
+    var completionCurrentChat: (([ChatMessageProtocol]) -> Void)?
+    var completionMessageReceive: (([ChatMessageProtocol]) -> Void)?
 
     init(chatReference: String) {
         self.chatReference = chatReference
@@ -23,7 +24,7 @@ extension FirebaseDataSource: DataSourceProtocol {
         let userID = Auth.auth().currentUser?.uid
         ref.child(chatReference).child(userID!).observeSingleEvent(of: .value, with: { snapshot in
           let value = snapshot.value as? NSDictionary
-          let username = value?["username"] as? String ?? ""
+          let username = value?["username"] as? String ?? ""            
         }) { error in
           print(error.localizedDescription)
         }

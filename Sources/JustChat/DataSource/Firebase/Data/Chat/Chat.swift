@@ -9,3 +9,13 @@ class Chat {
         self.group = group
     }
 }
+
+extension Chat: ChatProtocol{
+    var idChat: String {
+        return self.id
+    }
+
+    var nameChat: String {
+        return self.name
+    }
+}
