@@ -31,12 +31,14 @@ extension FirebaseDataSource: DataSourceProtocol {
     }
 
     func getChat(with id: String) async throws -> ChatProtocol {
-
+        return Chat(id: "example", name: "test", group: "")
     }
 
     func send(this message: ChatMessageProtocol) async throws {
 
     }
 
-
+    func receive(this message: ChatMessageProtocol) async throws {
+        
+    }
 }
