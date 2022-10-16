@@ -28,6 +28,7 @@ extension FirebaseDataSource: DataSourceProtocol {
         }) { error in
           print(error.localizedDescription)
         }
+        return []
     }
 
     func getChat(with id: String) async throws -> ChatProtocol {
@@ -39,6 +40,6 @@ extension FirebaseDataSource: DataSourceProtocol {
     }
 
     func receive(this message: ChatMessageProtocol) async throws {
-        
+
     }
 }
