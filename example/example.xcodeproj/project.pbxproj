@@ -7,21 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA79C9C228FFED4000183E73 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA79C9C128FFED3F00183E73 /* MainViewController.swift */; };
+		AA79C9C428FFED8400183E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA79C9C328FFED8400183E73 /* Main.storyboard */; };
+		AAF42E2628FD83A100053114 /* JustChat in Frameworks */ = {isa = PBXBuildFile; productRef = AAF42E2528FD83A100053114 /* JustChat */; };
 		C1EE199E28F4B3BC009F8F2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE199D28F4B3BC009F8F2A /* AppDelegate.swift */; };
 		C1EE19A028F4B3BC009F8F2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE199F28F4B3BC009F8F2A /* SceneDelegate.swift */; };
-		C1EE19A228F4B3BC009F8F2A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE19A128F4B3BC009F8F2A /* ViewController.swift */; };
-		C1EE19A528F4B3BC009F8F2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1EE19A328F4B3BC009F8F2A /* Main.storyboard */; };
 		C1EE19A828F4B3BC009F8F2A /* example.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C1EE19A628F4B3BC009F8F2A /* example.xcdatamodeld */; };
 		C1EE19AA28F4B3BE009F8F2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1EE19A928F4B3BE009F8F2A /* Assets.xcassets */; };
 		C1EE19AD28F4B3BE009F8F2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1EE19AB28F4B3BE009F8F2A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA79C9C128FFED3F00183E73 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AA79C9C328FFED8400183E73 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		C1EE199A28F4B3BC009F8F2A /* example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EE199D28F4B3BC009F8F2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1EE199F28F4B3BC009F8F2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C1EE19A128F4B3BC009F8F2A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C1EE19A428F4B3BC009F8F2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C1EE19A728F4B3BC009F8F2A /* example.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = example.xcdatamodel; sourceTree = "<group>"; };
 		C1EE19A928F4B3BE009F8F2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1EE19AC28F4B3BE009F8F2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -34,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF42E2628FD83A100053114 /* JustChat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,8 +64,8 @@
 			children = (
 				C1EE199D28F4B3BC009F8F2A /* AppDelegate.swift */,
 				C1EE199F28F4B3BC009F8F2A /* SceneDelegate.swift */,
-				C1EE19A128F4B3BC009F8F2A /* ViewController.swift */,
-				C1EE19A328F4B3BC009F8F2A /* Main.storyboard */,
+				AA79C9C128FFED3F00183E73 /* MainViewController.swift */,
+				AA79C9C328FFED8400183E73 /* Main.storyboard */,
 				C1EE19A928F4B3BE009F8F2A /* Assets.xcassets */,
 				C1EE19AB28F4B3BE009F8F2A /* LaunchScreen.storyboard */,
 				C1EE19AE28F4B3BE009F8F2A /* Info.plist */,
@@ -96,6 +98,9 @@
 			dependencies = (
 			);
 			name = example;
+			packageProductDependencies = (
+				AAF42E2528FD83A100053114 /* JustChat */,
+			);
 			productName = example;
 			productReference = C1EE199A28F4B3BC009F8F2A /* example.app */;
 			productType = "com.apple.product-type.application";
@@ -124,6 +129,9 @@
 				Base,
 			);
 			mainGroup = C1EE199128F4B3BC009F8F2A;
+			packageReferences = (
+				AAF42E2428FD83A100053114 /* XCRemoteSwiftPackageReference "JustChat" */,
+			);
 			productRefGroup = C1EE199B28F4B3BC009F8F2A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +146,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA79C9C428FFED8400183E73 /* Main.storyboard in Resources */,
 				C1EE19AD28F4B3BE009F8F2A /* LaunchScreen.storyboard in Resources */,
 				C1EE19AA28F4B3BE009F8F2A /* Assets.xcassets in Resources */,
-				C1EE19A528F4B3BC009F8F2A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,23 +160,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1EE19A828F4B3BC009F8F2A /* example.xcdatamodeld in Sources */,
-				C1EE19A228F4B3BC009F8F2A /* ViewController.swift in Sources */,
 				C1EE199E28F4B3BC009F8F2A /* AppDelegate.swift in Sources */,
 				C1EE19A028F4B3BC009F8F2A /* SceneDelegate.swift in Sources */,
+				AA79C9C228FFED4000183E73 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C1EE19A328F4B3BC009F8F2A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C1EE19A428F4B3BC009F8F2A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C1EE19AB28F4B3BE009F8F2A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -301,7 +301,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R88CDNMKLQ;
+				DEVELOPMENT_TEAM = B79H4J68B7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -329,7 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R88CDNMKLQ;
+				DEVELOPMENT_TEAM = B79H4J68B7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -372,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AAF42E2428FD83A100053114 /* XCRemoteSwiftPackageReference "JustChat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fsalom/JustChat";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AAF42E2528FD83A100053114 /* JustChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAF42E2428FD83A100053114 /* XCRemoteSwiftPackageReference "JustChat" */;
+			productName = JustChat;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C1EE19A628F4B3BC009F8F2A /* example.xcdatamodeld */ = {

@@ -8,6 +8,7 @@ public class JustChatManager {
 }
 
 extension JustChatManager: DataSourceProtocol {
+
     public func initialization() {
         self.dataSource.initialization()
     }
@@ -31,6 +32,14 @@ extension JustChatManager: DataSourceProtocol {
     public func send(this message: ChatMessageProtocol) async throws {
         do {
             return try await self.dataSource.send(this: message)
+        }catch{
+            throw error
+        }
+    }
+
+    public func receive(this message: ChatMessageProtocol) async throws {
+        do {
+            return try await self.dataSource.receive(this: message)
         }catch{
             throw error
         }
