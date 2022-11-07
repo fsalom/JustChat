@@ -1,22 +1,22 @@
-class ChatMessage {
+public class ChatMessage {
     var id: String
-    var text: String
-    var image: String
+    private var text, userId: String
+    var timestamp: Int
 
-    init(id: String, text: String, image: String) {
+    init(id: String, text: String, userId: String, timestamp: Int) {
         self.id = id
         self.text = text
-        self.image = image
+        self.userId = userId
+        self.timestamp = timestamp
     }
 }
 
 extension ChatMessage: ChatMessageProtocol{
-    var message: String {
+    public var message: String {
         return text
     }
 
-    var imageURL: String {
-        return image
+    public var userID: String {
+        return userId
     }
-
 }

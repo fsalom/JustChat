@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA79C9C228FFED4000183E73 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA79C9C128FFED3F00183E73 /* MainViewController.swift */; };
 		AA79C9C428FFED8400183E73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA79C9C328FFED8400183E73 /* Main.storyboard */; };
+		AA82F0EB290A7B3600A7BAD7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA82F0EA290A7B3600A7BAD7 /* GoogleService-Info.plist */; };
 		AAF42E2628FD83A100053114 /* JustChat in Frameworks */ = {isa = PBXBuildFile; productRef = AAF42E2528FD83A100053114 /* JustChat */; };
 		C1EE199E28F4B3BC009F8F2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE199D28F4B3BC009F8F2A /* AppDelegate.swift */; };
 		C1EE19A028F4B3BC009F8F2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE199F28F4B3BC009F8F2A /* SceneDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* Begin PBXFileReference section */
 		AA79C9C128FFED3F00183E73 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AA79C9C328FFED8400183E73 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		AA82F0EA290A7B3600A7BAD7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1EE199A28F4B3BC009F8F2A /* example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EE199D28F4B3BC009F8F2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1EE199F28F4B3BC009F8F2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 		C1EE199C28F4B3BC009F8F2A /* example */ = {
 			isa = PBXGroup;
 			children = (
+				AA82F0EA290A7B3600A7BAD7 /* GoogleService-Info.plist */,
 				C1EE199D28F4B3BC009F8F2A /* AppDelegate.swift */,
 				C1EE199F28F4B3BC009F8F2A /* SceneDelegate.swift */,
 				AA79C9C128FFED3F00183E73 /* MainViewController.swift */,
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA79C9C428FFED8400183E73 /* Main.storyboard in Resources */,
+				AA82F0EB290A7B3600A7BAD7 /* GoogleService-Info.plist in Resources */,
 				C1EE19AD28F4B3BE009F8F2A /* LaunchScreen.storyboard in Resources */,
 				C1EE19AA28F4B3BE009F8F2A /* Assets.xcassets in Resources */,
 			);
@@ -301,7 +305,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B79H4J68B7;
+				DEVELOPMENT_TEAM = R88CDNMKLQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -314,7 +318,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = es.fernandosalom.example;
+				PRODUCT_BUNDLE_IDENTIFIER = es.rudo.JustChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -329,7 +333,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = B79H4J68B7;
+				DEVELOPMENT_TEAM = R88CDNMKLQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = example/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -342,7 +346,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = es.fernandosalom.example;
+				PRODUCT_BUNDLE_IDENTIFIER = es.rudo.JustChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

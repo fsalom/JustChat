@@ -4,4 +4,5 @@ public protocol DataSourceProtocol {
     func getChat(with id: String) async throws -> ChatProtocol
     func send(this message: ChatMessageProtocol) async throws
     func receive(this message: ChatMessageProtocol) async throws
+    func getUserID() throws -> String
 }

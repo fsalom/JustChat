@@ -1,4 +1,8 @@
 public protocol ChatProtocol {
-    var idChat: String { get }
-    var nameChat: String { get }
+    var id: String { get }
+    var name: String { get }
+    var lastMessage: String { get }
+    var otherUserId: String { get }
+    var otherUserImage: String { get }
+    var messages: [ChatMessageProtocol] { get }
 }
