@@ -1,12 +1,14 @@
 class Chat {
-    var id: String
-    var name: String
-    var group: String
+    var id,name, lastMessage, otherUserId, otherUserImage: String
+    var messages: [ChatMessageProtocol]
 
-    init(id: String, name: String, group: String) {
+    init(id: String, name: String, lastMessage: String, otherUserId: String, otherUserImage: String, messages: [ChatMessage]) {
         self.id = id
         self.name = name
-        self.group = group
+        self.lastMessage = lastMessage
+        self.otherUserId = otherUserId
+        self.otherUserImage = otherUserImage
+        self.messages = messages
     }
 }
 

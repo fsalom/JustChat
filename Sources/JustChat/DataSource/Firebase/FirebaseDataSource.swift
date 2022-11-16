@@ -3,43 +3,66 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseDatabase
 
-class FirebaseDataSource {
+public class FirebaseDataSource {
+    internal init(chatReference: String, ref: DatabaseReference? = Database.database().reference(), completionChats: (([ChatProtocol]) -> Void)? = nil, completionCurrentChat: (([ChatMessageProtocol]) -> Void)? = nil, completionMessageReceive: (([ChatMessageProtocol]) -> Void)? = nil) {
+        self.chatReference = chatReference
+        self.ref = ref
+        self.completionChats = completionChats
+        self.completionCurrentChat = completionCurrentChat
+        self.completionMessageReceive = completionMessageReceive
+    }
+
     var chatReference: String
-    var ref: DatabaseReference! = Database.database().reference()
+    var ref: DatabaseReference!
     var completionChats: (([ChatProtocol]) -> Void)?
     var completionCurrentChat: (([ChatMessageProtocol]) -> Void)?
     var completionMessageReceive: (([ChatMessageProtocol]) -> Void)?
 
-    init(chatReference: String) {
+    public init(chatReference: String) {
         self.chatReference = chatReference
     }
 }
 
 extension FirebaseDataSource: DataSourceProtocol {
-    func initialization() {
-        FirebaseApp.configure()
-    }
+    enum FirebaseError: Error {
+        case userNotFound
+        case noData
+        case parseError
 
-    func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
-        let userID = Auth.auth().currentUser?.uid
-        ref.child(chatReference).child(userID!).observeSingleEvent(of: .value, with: { snapshot in
-          let value = snapshot.value as? NSDictionary
-          let username = value?["username"] as? String ?? ""            
-        }) { error in
-          print(error.localizedDescription)
+    }
+    public func initialization() {
+        Auth.auth().signIn(withEmail: "pablocea@rudo.es", password: "12345678A") { authResult, error in
+            if let error = error {
+                print(error)
+            }
+            print(authResult)
+
         }
-        return []
+        ref = Database.database().reference()
     }
 
-    func getChat(with id: String) async throws -> ChatProtocol {
-        return Chat(id: "example", name: "test", group: "")
+    public func getUserID() throws -> String {
+        guard let userID = Auth.auth().currentUser?.uid else { throw FirebaseError.userNotFound }
+        return userID
     }
 
-    func send(this message: ChatMessageProtocol) async throws {
+    public func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
+        guard let userID = Auth.auth().currentUser?.uid else { throw FirebaseError.userNotFound }
+        let snapShot = try await ref.child("users/\(userID)/chats").getData()
+        guard let chatsDict = snapShot.value as? NSDictionary else { throw FirebaseError.noData}
+
+        return try ChatParser.parseChats(from: chatsDict)
+    }
+
+    public func getChat(with id: String) async throws -> ChatProtocol {
+        return Chat(id: "", name: "", lastMessage: "", otherUserId: "", otherUserImage: "", messages: [])
+    }
+
+    public func send(this message: ChatMessageProtocol) async throws {
 
     }
 
-    func receive(this message: ChatMessageProtocol) async throws {
+    public func receive(this message: ChatMessageProtocol) async throws {
 
     }
 }

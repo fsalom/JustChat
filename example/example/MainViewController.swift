@@ -16,8 +16,10 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func buttonPressed(_ sender: Any) {
-        let justChatVC = JustChatViewController.getStoryboardVC() as! JustChatViewController
+        let dataSource = FirebaseDataSource(chatReference: "https://fir-chat-d613e-default-rtdb.europe-west1.firebasedatabase.app/")
+        let manager = JustChatManager(with: dataSource)
+        let chatListVC = ChatListBuilder.build(manager: manager)
 
-        navigationController?.pushViewController(justChatVC, animated: true)
+        navigationController?.pushViewController(chatListVC, animated: true)
     }
 }

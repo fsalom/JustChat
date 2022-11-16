@@ -1,4 +1,4 @@
 public protocol ChatMessageProtocol {
     var message: String { get }
-    var imageURL: String { get }
+    var userID: String { get }
 }

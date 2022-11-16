@@ -8,8 +8,8 @@
 import UIKit
 
 public extension UIViewController {
-    static func getStoryboardVC() -> UIViewController {
-        let storyboard = UIStoryboard(name: String(describing: self), bundle: Bundle.module)
+    static func getStoryboardVC<T: UIViewController>(_ type: T.Type) -> T {
+        let storyboard = UIStoryboard(name: String(describing: type), bundle: Bundle.module)
         return storyboard.instantiateInitialViewController()!
     }
 }

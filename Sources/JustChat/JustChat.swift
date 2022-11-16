@@ -13,6 +13,14 @@ extension JustChatManager: DataSourceProtocol {
         self.dataSource.initialization()
     }
 
+    public func getUserID() throws -> String {
+        do {
+            return try self.dataSource.getUserID()
+        }catch{
+            throw error
+        }
+    }
+
     public func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
         do {
             return try await self.dataSource.getChats(with: parameters)

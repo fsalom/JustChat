@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ChatInputViewDelegate: AnyObject {
+    func didPressSendButton(with message: String)
+}
+
 class ChatInputView: UIView {
     // MARK: - Properties
 
@@ -14,6 +18,7 @@ class ChatInputView: UIView {
     @IBOutlet weak var textView: UITextView!
 
     // MARK: - Properties
+    weak var delegate: ChatInputViewDelegate!
 
     // MARK: - Life cycle
     override var intrinsicContentSize: CGSize {
@@ -29,5 +34,11 @@ class ChatInputView: UIView {
     // MARK: UITextFieldDelegate
     func configure(_ textView: UITextView) {
         textView.layer.cornerRadius = 10
+    }
+
+    // MARK: - IBActions
+    @IBAction func sendButtonPressed(_ sender: Any) {
+        if textView.text.isEmpty { return }
+        delegate?.didPressSendButton(with: textView.text)
     }
 }
