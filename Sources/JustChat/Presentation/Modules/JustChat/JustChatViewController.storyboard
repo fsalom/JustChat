@@ -38,20 +38,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="JWa-Au-eoP" customClass="ChatInputView" customModule="JustChat">
-                    <rect key="frame" x="0.0" y="0.0" width="389" height="43"/>
+                    <rect key="frame" x="0.0" y="0.0" width="389" height="146"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ue1-mT-tKe">
-                            <rect key="frame" x="10" y="10" width="342.33333333333331" height="33"/>
+                            <rect key="frame" x="10" y="10" width="342.33333333333331" height="136"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <color key="textColor" systemColor="labelColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQj-tq-h97">
-                            <rect key="frame" x="362.33333333333331" y="10" width="16.666666666666686" height="33"/>
+                            <rect key="frame" x="362.33333333333331" y="10" width="16.666666666666686" height="136"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="" image="arrow.up" catalog="system"/>
+                            <connections>
+                                <action selector="sendButtonPressed:" destination="JWa-Au-eoP" eventType="touchUpInside" id="fji-Mw-giX"/>
+                            </connections>
                         </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="hO2-I2-OYl"/>

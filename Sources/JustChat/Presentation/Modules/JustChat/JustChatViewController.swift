@@ -19,19 +19,7 @@ public class JustChatViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        Task {
-            do {
-                let chats = try await viewModel.manager.getChats(with: [:])
-                print(chats)
-            } catch {
-                if let firebaseError = error as? FirebaseDataSource.FirebaseError {
-                    print(firebaseError)
-                } else {
-                    print(error)
-                }
-            }
-
-        }
+        configure(inputMessageView)
         configure(tableView)
     }
 
@@ -94,7 +82,7 @@ extension JustChatViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotOwnMessageCell",
                                                          for: indexPath) as! NotOwnMessageCell
 
-                cell.display(with: "Message number \(indexPath.row)")
+                cell.display(with: message.message)
                 return cell
             }
         } catch {
@@ -105,5 +93,15 @@ extension JustChatViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return UITableViewCell()
+    }
+}
+
+
+extension JustChatViewController: ChatInputViewDelegate {
+    func configure(_ inputAccessoryView: ChatInputView) {
+        inputAccessoryView.delegate = self
+    }
+
+    func didPressSendButton(with message: String) {
     }
 }
