@@ -19,17 +19,11 @@ public class JustChatViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupBindings()
+        setupNavigation()
         configure(inputMessageView)
         configure(tableView)
-    }
-
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-
-        let point = CGPoint(x: 0, y: self.tableView.contentSize.height + self.tableView.contentInset.bottom - self.tableView.frame.height + inputAccessoryView!.frame.height)
-        tableView.setContentOffset(point,
-                                   animated: false)
+        goToBottom()
     }
 
     // MARK: - ChatToolBar
@@ -44,6 +38,30 @@ public class JustChatViewController: UIViewController {
     public override var canResignFirstResponder: Bool {
         return true
     }
+
+    // MARK: - Functions
+    func setupNavigation() {
+        self.navigationItem.title = self.viewModel.chat.name
+        self.navigationController?.navigationBar.barTintColor = .white
+    }
+
+    func setupBindings() {
+        viewModel.chatDidChange = { [weak self] in
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                self.tableView.reloadData()
+                self.goToBottom()
+            }
+        }
+    }
+
+    func goToBottom() {
+        if (self.viewModel.chat.messages.count - 1) >= 0 {
+            self.tableView.scrollToRow(at: IndexPath(row: self.viewModel.chat.messages.count - 1, section: 0),
+                                       at: .bottom,
+                                       animated: false)
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
@@ -52,8 +70,8 @@ extension JustChatViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
 
-        tableView.contentInset.bottom = inputAccessoryView!.frame.height
-        tableView.verticalScrollIndicatorInsets.bottom = inputAccessoryView!.frame.height
+        tableView.contentInset.bottom = 55
+        tableView.verticalScrollIndicatorInsets.bottom = 55
 
         tableView.register(UINib(nibName: "OwnMessageCell",
                                  bundle: .module),
@@ -76,13 +94,13 @@ extension JustChatViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "OwnMessageCell",
                                                          for: indexPath) as! OwnMessageCell
 
-                cell.display(with: message.message)
+                cell.display(with: message)
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotOwnMessageCell",
                                                          for: indexPath) as! NotOwnMessageCell
 
-                cell.display(with: message.message)
+                cell.display(with: message)
                 return cell
             }
         } catch {
@@ -103,5 +121,6 @@ extension JustChatViewController: ChatInputViewDelegate {
     }
 
     func didPressSendButton(with message: String) {
+        viewModel.send(message: message)
     }
 }

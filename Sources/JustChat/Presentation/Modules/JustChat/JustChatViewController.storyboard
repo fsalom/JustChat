@@ -38,35 +38,43 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="JWa-Au-eoP" customClass="ChatInputView" customModule="JustChat">
-                    <rect key="frame" x="0.0" y="0.0" width="389" height="146"/>
+                    <rect key="frame" x="0.0" y="0.0" width="389" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ue1-mT-tKe">
-                            <rect key="frame" x="10" y="10" width="342.33333333333331" height="136"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <color key="textColor" systemColor="labelColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQj-tq-h97">
-                            <rect key="frame" x="362.33333333333331" y="10" width="16.666666666666686" height="136"/>
-                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="" image="arrow.up" catalog="system"/>
-                            <connections>
-                                <action selector="sendButtonPressed:" destination="JWa-Au-eoP" eventType="touchUpInside" id="fji-Mw-giX"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4B4-Ul-CRe">
+                            <rect key="frame" x="10" y="5" width="369" height="35"/>
+                            <subviews>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ue1-mT-tKe">
+                                    <rect key="frame" x="0.0" y="0.0" width="343" height="35"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="textColor" systemColor="labelColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQj-tq-h97">
+                                    <rect key="frame" x="353" y="0.0" width="16" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="16" id="o0e-Zh-bVQ"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="" image="arrow.up" catalog="system"/>
+                                    <connections>
+                                        <action selector="sendButtonPressed:" destination="JWa-Au-eoP" eventType="touchUpInside" id="fji-Mw-giX"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="GGT-h8-NCa"/>
+                            </constraints>
+                        </stackView>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="hO2-I2-OYl"/>
                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                     <constraints>
-                        <constraint firstItem="Ue1-mT-tKe" firstAttribute="top" secondItem="JWa-Au-eoP" secondAttribute="top" constant="10" id="2Ch-l7-Va3"/>
-                        <constraint firstItem="hO2-I2-OYl" firstAttribute="bottom" secondItem="Ue1-mT-tKe" secondAttribute="bottom" id="ASb-GR-E9s"/>
-                        <constraint firstItem="Ue1-mT-tKe" firstAttribute="leading" secondItem="JWa-Au-eoP" secondAttribute="leading" constant="10" id="Kjc-1M-wi8"/>
-                        <constraint firstItem="DQj-tq-h97" firstAttribute="top" secondItem="JWa-Au-eoP" secondAttribute="top" constant="10" id="c9T-6S-rui"/>
-                        <constraint firstItem="hO2-I2-OYl" firstAttribute="bottom" secondItem="DQj-tq-h97" secondAttribute="bottom" id="f5O-sf-CZl"/>
-                        <constraint firstItem="DQj-tq-h97" firstAttribute="leading" secondItem="Ue1-mT-tKe" secondAttribute="trailing" constant="10" id="qrA-Lp-prs"/>
-                        <constraint firstAttribute="trailing" secondItem="DQj-tq-h97" secondAttribute="trailing" constant="10" id="yIz-xS-l85"/>
+                        <constraint firstItem="hO2-I2-OYl" firstAttribute="bottom" secondItem="4B4-Ul-CRe" secondAttribute="bottom" constant="10" id="46G-8U-rqh"/>
+                        <constraint firstItem="4B4-Ul-CRe" firstAttribute="leading" secondItem="JWa-Au-eoP" secondAttribute="leading" constant="10" id="o2s-oc-HGP"/>
+                        <constraint firstItem="4B4-Ul-CRe" firstAttribute="top" secondItem="JWa-Au-eoP" secondAttribute="top" constant="10" id="oiF-7A-Rfy"/>
+                        <constraint firstAttribute="trailing" secondItem="4B4-Ul-CRe" secondAttribute="trailing" constant="10" id="qLL-WA-6n1"/>
                     </constraints>
                     <connections>
                         <outlet property="textView" destination="Ue1-mT-tKe" id="hg5-c5-hAR"/>

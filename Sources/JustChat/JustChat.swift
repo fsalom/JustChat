@@ -1,3 +1,4 @@
+import Foundation
 public class JustChatManager {
     var dataSource: DataSourceProtocol
 
@@ -8,7 +9,6 @@ public class JustChatManager {
 }
 
 extension JustChatManager: DataSourceProtocol {
-
     public func initialization() {
         self.dataSource.initialization()
     }
@@ -16,7 +16,7 @@ extension JustChatManager: DataSourceProtocol {
     public func getUserID() throws -> String {
         do {
             return try self.dataSource.getUserID()
-        }catch{
+        } catch {
             throw error
         }
     }
@@ -24,23 +24,23 @@ extension JustChatManager: DataSourceProtocol {
     public func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
         do {
             return try await self.dataSource.getChats(with: parameters)
-        }catch{
+        } catch {
             throw error
         }
     }
 
-    public func getChat(with id: String) async throws -> ChatProtocol {
+    public func getChat(with id: String, completionCurrentChat: ((ChatProtocol) -> Void)? = nil) throws {
         do {
-            return try await self.dataSource.getChat(with: id)
-        }catch{
+            return try self.dataSource.getChat(with: id, completionCurrentChat: completionCurrentChat)
+        } catch {
             throw error
         }
     }
 
-    public func send(this message: ChatMessageProtocol) async throws {
+    public func send(this message: ChatMessageProtocol, for chatID: String) async throws {
         do {
-            return try await self.dataSource.send(this: message)
-        }catch{
+            return try await self.dataSource.send(this: message, for: chatID)
+        } catch {
             throw error
         }
     }
