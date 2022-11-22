@@ -11,9 +11,11 @@ class NotOwnMessageCell: UITableViewCell {
 
     @IBOutlet weak private var messageContainerView: UIView!
     @IBOutlet weak private var messageLabel: UILabel!
-    
-    func display(with message: String) {
+    @IBOutlet weak var hourLabel: UILabel!
+
+    func display(with message: ChatMessageProtocol) {
         messageContainerView.layer.cornerRadius = 10
-        messageLabel.text = message
+        messageLabel.text = message.message
+        hourLabel.text = Date(timeIntervalSince1970: TimeInterval(message.timestamp)).toString(withFormat: "HH:mm")
     }
 }

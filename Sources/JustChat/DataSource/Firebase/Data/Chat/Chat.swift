@@ -1,23 +1,15 @@
-class Chat {
-    var id,name, lastMessage, otherUserId, otherUserImage: String
+class Chat: ChatProtocol {
+    var id,name, otherUserId, otherUserImage: String
     var messages: [ChatMessageProtocol]
+    var lastMessage: String {
+        return messages.last?.message ?? ""
+    }
 
-    init(id: String, name: String, lastMessage: String, otherUserId: String, otherUserImage: String, messages: [ChatMessage]) {
+    init(id: String, name: String, otherUserId: String, otherUserImage: String, messages: [ChatMessageProtocol]) {
         self.id = id
         self.name = name
-        self.lastMessage = lastMessage
         self.otherUserId = otherUserId
         self.otherUserImage = otherUserImage
         self.messages = messages
-    }
-}
-
-extension Chat: ChatProtocol{
-    var idChat: String {
-        return self.id
-    }
-
-    var nameChat: String {
-        return self.name
     }
 }

@@ -17,21 +17,32 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9j-mB-M2h">
-                        <rect key="frame" x="347.66666666666669" y="10" width="81.333333333333314" height="55"/>
+                        <rect key="frame" x="312.66666666666669" y="10" width="116.33333333333331" height="55"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOX-hH-XXz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GOX-hH-XXz">
                                 <rect key="frame" x="20.000000000000004" y="5" width="41.333333333333343" height="45"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXm-g2-O10">
+                                <rect key="frame" x="71.333333333333314" y="36" width="35" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="6aX-kF-b6j"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.14509803921568626" green="0.82745098039215681" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.11974076720965279" green="0.6862373737373737" blue="0.33427138737445616" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GOX-hH-XXz" firstAttribute="top" secondItem="R9j-mB-M2h" secondAttribute="top" constant="5" id="E1h-3i-NfT"/>
+                            <constraint firstAttribute="trailing" secondItem="kXm-g2-O10" secondAttribute="trailing" constant="10" id="EeF-4u-EVB"/>
                             <constraint firstItem="GOX-hH-XXz" firstAttribute="leading" secondItem="R9j-mB-M2h" secondAttribute="leading" constant="20" id="I21-Tz-Glc"/>
                             <constraint firstAttribute="bottom" secondItem="GOX-hH-XXz" secondAttribute="bottom" constant="5" id="Ox5-tS-YDW"/>
-                            <constraint firstAttribute="trailing" secondItem="GOX-hH-XXz" secondAttribute="trailing" constant="20" id="a43-lD-jFK"/>
+                            <constraint firstAttribute="bottom" secondItem="kXm-g2-O10" secondAttribute="bottom" constant="4" id="qPP-Nu-xKK"/>
+                            <constraint firstItem="kXm-g2-O10" firstAttribute="leading" secondItem="GOX-hH-XXz" secondAttribute="trailing" constant="10" id="vMA-i5-xMB"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -45,10 +56,11 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="hourLabel" destination="kXm-g2-O10" id="0ML-6m-FHC"/>
                 <outlet property="messageContainerView" destination="R9j-mB-M2h" id="Mmc-gu-YMp"/>
                 <outlet property="messageLabel" destination="GOX-hH-XXz" id="rPF-V3-qUC"/>
             </connections>
-            <point key="canvasLocation" x="248.46153846153845" y="21.682464454976301"/>
+            <point key="canvasLocation" x="278" y="7"/>
         </tableViewCell>
     </objects>
 </document>

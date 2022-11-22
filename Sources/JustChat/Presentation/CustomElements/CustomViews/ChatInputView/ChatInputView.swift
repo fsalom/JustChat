@@ -40,5 +40,6 @@ class ChatInputView: UIView {
     @IBAction func sendButtonPressed(_ sender: Any) {
         if textView.text.isEmpty { return }
         delegate?.didPressSendButton(with: textView.text)
+        textView.text = ""
     }
 }
