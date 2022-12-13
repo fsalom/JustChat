@@ -9,72 +9,93 @@ public class FirebaseDataSource {
         self.ref = ref
     }
 
-    var chatReference: String
-    var ref: DatabaseReference!
-
     public init(chatReference: String) {
         self.chatReference = chatReference
     }
+
+    var chatReference: String
+    var ref: DatabaseReference!
+    var user: UserProtocol!
 }
 
 extension FirebaseDataSource: DataSourceProtocol {
-    enum FirebaseError: Error {
-        case userNotFound
-        case noData
-        case parseError
-        case unknownError
-
-    }
-    public func initialization() {
-        Auth.auth().signIn(withEmail: "pablocea@rudo.es", password: "12345678A") { authResult, error in
-            if let error = error {
+    
+    public func initialization()  {
+        Task {
+            do {
+                // pablocea
+                // pablo
+                // pablo0
+                let authDataResult = try await Auth.auth().signIn(withEmail: "pablo0@rudo.es", password: "12345678A")
+                print(authDataResult)
+                ref = Database.database().reference()
+                user = try await getUserInfo()
+            } catch {
                 print(error)
             }
-            print(authResult)
-
         }
-        ref = Database.database().reference()
+    }
+
+    func getUserInfo() async throws -> FirebaseUser {
+        let userID = try getUserID()
+        let snapShot = try await ref.child("user").queryOrderedByKey().queryEqual(toValue: userID).getData()
+        guard let userInfoDict = snapShot.value as? NSDictionary else { throw DataSourceError.noData }
+        return try FirebaseParser.parseUserInfo(from: userInfoDict)
     }
 
     public func getUserID() throws -> String {
-        guard let userID = Auth.auth().currentUser?.uid else { throw FirebaseError.userNotFound }
+        if user != nil {
+            return user.id
+        }
+        
+        guard let userID = Auth.auth().currentUser?.uid else { throw DataSourceError.userNotFound }
         return userID
     }
 
-    public func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
-        guard let userID = Auth.auth().currentUser?.uid else { throw FirebaseError.userNotFound }
-        let snapShot = try await ref.child("users/\(userID)/chats").getData()
-        guard let chatsDict = snapShot.value as? NSDictionary else { throw FirebaseError.noData}
+    public func getChats() async throws -> [ChatProtocol] {
+        var snapShots = [DataSnapshot]()
+        for chatID in user.chatsIDs {
+            async let snapShot = ref.child("chats/").queryOrderedByKey().queryEqual(toValue: chatID).getData()
+            try await snapShots.append(snapShot)
+        }
 
-        return try ChatParser.parseChats(from: chatsDict)
+        var chats = [ChatProtocol]()
+        for snapShot in snapShots {
+            guard let chatsDict = snapShot.value as? NSDictionary else { throw DataSourceError.noData }
+            let chat = try FirebaseParser.parseChat(from: chatsDict)
+            chats.append(chat)
+        }
+        return chats
     }
 
-    public func getChat(with id: String, completionCurrentChat: ((ChatProtocol) -> Void)? = nil) throws {
-        guard let userID = Auth.auth().currentUser?.uid else { throw FirebaseError.userNotFound }
-        ref.child("/users/\(userID)/chats/\(id)").observe(.value) { snapshot in
+    public func getChat(with id: String, completionCurrentChat: ((Result<ChatProtocol, DataSourceError>) -> Void)? = nil) {
+        ref.child("chats/").queryOrderedByKey().queryEqual(toValue: id).observe(.value) { snapshot in
             do {
-                guard let chatDict = snapshot.value as? NSDictionary else { throw FirebaseError.noData }
-                let chat = try ChatParser.parseChat(from: chatDict, with: id)
-                completionCurrentChat?(chat)
+                guard let chatDict = snapshot.value as? NSDictionary else { throw DataSourceError.noData }
+                let chat = try FirebaseParser.parseChat(from: chatDict)
+                completionCurrentChat?(.success(chat))
             } catch {
-                // TODO
-                print(error)
+                if let error = error as? DataSourceError {
+                    completionCurrentChat?(.failure(error))
+                } else { completionCurrentChat?(.failure(.unknownError)) }
             }
         }
     }
 
     public func send(this message: ChatMessageProtocol, for chatID: String) async throws {
-        guard let userID = Auth.auth().currentUser?.uid else { throw FirebaseError.userNotFound }
-        guard let key = ref.child("users\(userID)/chats/\(chatID)/messages").childByAutoId().key else { throw FirebaseError.noData }
+        guard let key = ref.child("chats/\(chatID)/messages").childByAutoId().key else { throw DataSourceError.noData }
         let message: [String: Any] = ["text": message.message,
-                                      "userId": message.userID,
+                                      "userID": message.userID,
                                       "timestamp": message.timestamp]
-        let childUpdates = ["/users/\(userID)/chats/\(chatID)/messages/\(key)": message]
+        let childUpdates = ["chats/\(chatID)/messages/\(key)": message]
         try await ref.updateChildValues(childUpdates)
-
     }
 
-    public func receive(this message: ChatMessageProtocol) async throws {
+    public func didExitChat(id: String) {
+        ref.child("chats/").queryOrderedByKey().queryEqual(toValue: id).removeAllObservers()
+    }
 
+    public func getUser() -> UserProtocol {
+        return user
     }
 }

@@ -8,9 +8,9 @@
 import UIKit
 
 public class JustChatBuilder {
-    static public func build(chat: ChatProtocol, manager: JustChatManager) -> JustChatViewController {
+    static public func build(chat: ChatProtocol, chatImage: UIImage) -> JustChatViewController {
         let viewController = UIViewController.getStoryboardVC(JustChatViewController.self)
-        let viewModel = JustChatViewModel(chat: chat, manager: manager)
+        let viewModel = JustChatViewModel(chat: chat, chatImage: chatImage)
         viewController.viewModel = viewModel
         return viewController
     }

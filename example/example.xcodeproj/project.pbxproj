@@ -28,7 +28,7 @@
 		C1EE19A728F4B3BC009F8F2A /* example.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = example.xcdatamodel; sourceTree = "<group>"; };
 		C1EE19A928F4B3BE009F8F2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1EE19AC28F4B3BE009F8F2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C1EE19AE28F4B3BE009F8F2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1EE19AE28F4B3BE009F8F2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C1EE19B528F4B415009F8F2A /* JustChat */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JustChat; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
