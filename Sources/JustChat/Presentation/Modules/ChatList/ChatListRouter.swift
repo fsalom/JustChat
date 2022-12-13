@@ -15,8 +15,9 @@ class ChatListRouter {
         self.viewController = viewController
     }
 
-    func navigateToChat(_ chat: ChatProtocol) {
-        let justChatVC = JustChatBuilder.build(chat: chat, manager: self.viewController.viewModel.manager)
-        self.viewController.navigationController?.pushViewController(justChatVC, animated: true)
+    func navigateToChat(_ chat: ChatProtocol, chatImage: UIImage) {
+        let justChatVC = JustChatBuilder.build(chat: chat, chatImage: chatImage)
+        self.viewController.navigationController?.pushViewController(justChatVC,
+                                                                     animated: true)
     }
 }

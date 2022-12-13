@@ -5,42 +5,63 @@
 //  Created by Pablo Ceacero on 27/10/22.
 //
 
-import Foundation
+import UIKit
 
 class JustChatViewModel {
     // MARK: - Properties
-    let manager: JustChatManager
+    var chatImage: UIImage
     var chat: ChatProtocol {
         didSet { chatDidChange?() }
     }
     var chatDidChange: (() -> Void)?
 
+    var user: UserProtocol!
+
     // MARK: - Init
-    init(chat: ChatProtocol, manager: JustChatManager) {
+    init(chat: ChatProtocol, chatImage: UIImage) {
         self.chat = chat
-        self.manager = manager
-        self.getChat()
+        self.chatImage = chatImage
+        Task {
+            await self.getUser()
+            await self.getChat()
+        }
     }
 
-    func getChat() {
-        do {
-            try manager.getChat(with: chat.id, completionCurrentChat: { [weak self] chat in
-                guard let self else { return }
-                self.chat = chat
-            })
-        } catch {}
+    func getUser() async {
+        self.user = Container.shared.manager.getUser()
+    }
 
+    func getChat() async {
+        Container.shared.manager.getChat(with: chat.id) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let chat): self.chat = chat
+            case .failure(let dataSourceError): print(dataSourceError)
+            }
+        }
     }
 
     func send(message: String) {
         Task {
             do {
-                let chatMessage = ChatMessage(id: UUID().uuidString, text: message, userId: try manager.getUserID(), timestamp: Int(Date().timeIntervalSince1970))
-                try await manager.send(this: chatMessage, for: chat.id)
-
+                let chatMessage = ChatMessage(id: UUID().uuidString,
+                                              text: message,
+                                              userId: user.id,
+                                              timestamp: Int(Date().timeIntervalSince1970))
+                try await Container.shared.manager.send(this: chatMessage,
+                                                                 for: chat.id)
             } catch {
-
+                // TODO
+                if let dataSourceError = error as? DataSourceError {
+                    print(dataSourceError)
+                } else {
+                    print(error)
+                }
             }
         }
+    }
+
+    func viewDidDisappear() {
+        Container.shared.manager.didExitChat(id: chat.id)
     }
 }

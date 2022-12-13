@@ -5,7 +5,7 @@
 //  Created by Pablo Ceacero on 7/11/22.
 //
 
-import Foundation
+import UIKit
 
 class ChatListViewModel {
     // MARK: - Properties
@@ -20,17 +20,18 @@ class ChatListViewModel {
     init(router: ChatListRouter, manager: JustChatManager) {
         self.manager = manager
         self.router = router
+        self.getChats()
     }
 
     func getChats() {
         Task {
             do {
-
-                let chats = try await manager.getChats(with: [:])
+                let chats = try await manager.getChats()
                 self.chats = chats
             } catch {
-                if let firebaseError = error as? FirebaseDataSource.FirebaseError {
-                    print(firebaseError)
+                // TODO
+                if let dataSourceError = error as? DataSourceError {
+                    print(dataSourceError)
                 } else {
                     print(error)
                 }
@@ -38,7 +39,7 @@ class ChatListViewModel {
         }
     }
 
-    func didSelectChatAt(_ index: Int) {
-        router.navigateToChat(chats[index])
+    func didSelectChatAt(_ index: Int, chatImage: UIImage) {
+        router.navigateToChat(chats[index], chatImage: chatImage)
     }
 }

@@ -18,10 +18,9 @@ public class ChatListViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "Chats"
+        setupNavigation()
         setupBindings()
         configure(tableView)
-        viewModel.getChats()
     }
 
     // MARK: - Functions
@@ -32,6 +31,10 @@ public class ChatListViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+
+    func setupNavigation() {
+        navigationItem.title = "Chats"
     }
 }
 
@@ -58,6 +61,8 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
 
     // Delegate
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.didSelectChatAt(indexPath.row)
+        let cell = tableView.cellForRow(at: indexPath) as! ChatCell
+        let chatImage = cell.chatImageView.image ?? UIImage()
+        viewModel.didSelectChatAt(indexPath.row, chatImage: chatImage)
     }
 }

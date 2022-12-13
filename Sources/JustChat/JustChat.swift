@@ -9,32 +9,20 @@ public class JustChatManager {
 }
 
 extension JustChatManager: DataSourceProtocol {
-    public func initialization() {
+    public func initialization()  {
         self.dataSource.initialization()
     }
 
-    public func getUserID() throws -> String {
+    public func getChats() async throws -> [ChatProtocol] {
         do {
-            return try self.dataSource.getUserID()
+            return try await self.dataSource.getChats()
         } catch {
             throw error
         }
     }
 
-    public func getChats(with parameters: [String : Any]) async throws -> [ChatProtocol] {
-        do {
-            return try await self.dataSource.getChats(with: parameters)
-        } catch {
-            throw error
-        }
-    }
-
-    public func getChat(with id: String, completionCurrentChat: ((ChatProtocol) -> Void)? = nil) throws {
-        do {
-            return try self.dataSource.getChat(with: id, completionCurrentChat: completionCurrentChat)
-        } catch {
-            throw error
-        }
+    public func getChat(with id: String, completionCurrentChat: ((Result<ChatProtocol, DataSourceError>) -> Void)?) {
+        return self.dataSource.getChat(with: id, completionCurrentChat: completionCurrentChat)
     }
 
     public func send(this message: ChatMessageProtocol, for chatID: String) async throws {
@@ -45,11 +33,11 @@ extension JustChatManager: DataSourceProtocol {
         }
     }
 
-    public func receive(this message: ChatMessageProtocol) async throws {
-        do {
-            return try await self.dataSource.receive(this: message)
-        }catch{
-            throw error
-        }
+    public func didExitChat(id: String) {
+        self.dataSource.didExitChat(id: id)
+    }
+
+    public func getUser() -> UserProtocol {
+        return self.dataSource.getUser()
     }
 }

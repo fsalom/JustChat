@@ -19,13 +19,9 @@ class ChatCell: UITableViewCell {
     // MARK: - Functions
     func display(chat: ChatProtocol) {
         chatImageView.layer.cornerRadius = chatImageView.bounds.height / 2
-        if let url = URL(string: chat.otherUserImage) {
-            chatImageView.af.setImage(withURL: url, imageTransition: .crossDissolve(0.25))
+        if let url = URL(string: chat.photo) {
+            chatImageView.af.setImage(withURL: url)
         }
-
         titleLabel.text = chat.name
-
-        lastMessageLabel.text = chat.lastMessage
-        lastMessageLabel.isHidden = chat.lastMessage.isEmpty
     }
 }
