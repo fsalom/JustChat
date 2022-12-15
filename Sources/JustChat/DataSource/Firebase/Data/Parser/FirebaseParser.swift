@@ -32,14 +32,37 @@ class FirebaseParser {
               let users = usersDict.allKeys as? [String] else { throw DataSourceError.parseError }
 
         let messages = try parseMessages(from: chatValue)
+        let messagesResult = getMessagesPerDay(from: messages)
+
 
         let chat = Chat(id: id,
                         name: chatName,
                         photo: photo,
                         users: users,
-                        messages: messages,
+                        messages: messagesResult,
                         type: type)
         return chat
+    }
+
+    static func getMessagesPerDay(from messages: [ChatMessageProtocol], result: [[ChatMessageProtocol]] = []) -> [[ChatMessageProtocol]] {
+        if messages.isEmpty { return result }
+        var messagesInDay = [ChatMessageProtocol]()
+        var auxMessages = messages
+        var auxResult = result
+        let dateComponents = Calendar.current.dateComponents([.day, .month, .year], from: Date(timeIntervalSince1970: TimeInterval(auxMessages.first!.timestamp)))
+        auxMessages.removeAll { message in
+            let dateComponentsOther = Calendar.current.dateComponents([.day, .month, .year], from: Date(timeIntervalSince1970: TimeInterval(message.timestamp)))
+            if dateComponents == dateComponentsOther {
+                messagesInDay.append(message)
+                return true
+            } else {
+                return false
+            }
+        }
+
+        auxResult.append(messagesInDay)
+
+        return getMessagesPerDay(from: auxMessages, result: auxResult)
     }
 
     static private func parseMessages(from chatDict: NSDictionary) throws -> [ChatMessageProtocol] {

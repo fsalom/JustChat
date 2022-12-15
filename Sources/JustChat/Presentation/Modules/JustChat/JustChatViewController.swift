@@ -113,9 +113,10 @@ public class JustChatViewController: UIViewController {
     }
 
     func goToBottom(animated: Bool = false) {
-        if (self.viewModel.chat.messages.count - 1) >= 0 {
-            self.tableView.scrollToRow(at: IndexPath(row: self.viewModel.chat.messages.count - 1,
-                                                     section: 0),
+        let lastSection = viewModel.chat.messages.count - 1
+        if (self.viewModel.chat.messages[lastSection].count - 1) >= 0 {
+            self.tableView.scrollToRow(at: IndexPath(row: self.viewModel.chat.messages[lastSection].count - 1,
+                                                     section: lastSection),
                                        at: .bottom,
                                        animated: animated)
         }
@@ -123,7 +124,6 @@ public class JustChatViewController: UIViewController {
 
     // MARK: - Observers
     @objc func willShow(notification: Notification) {
-        print("Will Show")
         let height = notification.getKeyBoardHeight
         if height > 350 {
             // Keyboard is shown
@@ -134,7 +134,6 @@ public class JustChatViewController: UIViewController {
     }
 
     @objc func willHide(notification: Notification) {
-        print("Will Hide")
         let height = notification.getKeyBoardHeight
         if height > 350 {
             // Keyboard is shown
@@ -166,12 +165,16 @@ extension JustChatViewController: UITableViewDelegate, UITableViewDataSource {
                            forCellReuseIdentifier: "NotOwnMessageCell")
     }
 
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.chat.messages.count
     }
 
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.chat.messages[section].count
+    }
+
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = viewModel.chat.messages[indexPath.row]
+        let message = viewModel.chat.messages[indexPath.section][indexPath.row]
         let userID = viewModel.user.id
         if message.userID == userID {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OwnMessageCell",
@@ -186,6 +189,17 @@ extension JustChatViewController: UITableViewDelegate, UITableViewDataSource {
             cell.display(with: message)
             return cell
         }
+    }
+
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ChatHeaderView()
+        guard let timestamp = viewModel.chat.messages[section].first?.timestamp else { return nil }
+        header.display(from: timestamp)
+        return header
+    }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
     }
 }
 

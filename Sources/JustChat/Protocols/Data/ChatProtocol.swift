@@ -4,7 +4,7 @@ public protocol ChatProtocol {
     var photo: String { get }
     var users: [String] { get }
     var type: ChatType { get }
-    var messages: [ChatMessageProtocol] { get }
+    var messages: [[ChatMessageProtocol]] { get }
 }
 
 public enum ChatType: String {

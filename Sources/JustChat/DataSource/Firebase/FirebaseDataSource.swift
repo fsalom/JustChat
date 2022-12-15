@@ -26,7 +26,7 @@ extension FirebaseDataSource: DataSourceProtocol {
                 // pablocea
                 // pablo
                 // pablo0
-                let authDataResult = try await Auth.auth().signIn(withEmail: "pablo0@rudo.es", password: "12345678A")
+                let authDataResult = try await Auth.auth().signIn(withEmail: "pablocea@rudo.es", password: "12345678A")
                 print(authDataResult)
                 ref = Database.database().reference()
                 user = try await getUserInfo()
