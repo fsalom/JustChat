@@ -10,7 +10,8 @@ import UIKit
 public class JustChatBuilder {
     static public func build(chat: ChatProtocol, chatImage: UIImage) -> JustChatViewController {
         let viewController = UIViewController.getStoryboardVC(JustChatViewController.self)
-        let viewModel = JustChatViewModel(chat: chat, chatImage: chatImage)
+        let router = JustChatRouter(viewController: viewController)
+        let viewModel = JustChatViewModel(router: router, chat: chat, chatImage: chatImage)
         viewController.viewModel = viewModel
         return viewController
     }

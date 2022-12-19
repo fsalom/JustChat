@@ -9,6 +9,7 @@ import UIKit
 
 class JustChatViewModel {
     // MARK: - Properties
+    let router: JustChatRouter
     var chatImage: UIImage
     var chat: ChatProtocol {
         didSet { chatDidChange?() }
@@ -18,13 +19,18 @@ class JustChatViewModel {
     var user: UserProtocol!
 
     // MARK: - Init
-    init(chat: ChatProtocol, chatImage: UIImage) {
+    init(router: JustChatRouter, chat: ChatProtocol, chatImage: UIImage) {
+        self.router = router
         self.chat = chat
         self.chatImage = chatImage
         Task {
             await self.getUser()
             await self.getChat()
         }
+    }
+
+    func viewDidDisappear() {
+        Container.shared.manager.didExitChat(id: chat.id)
     }
 
     func getUser() async {
@@ -61,7 +67,7 @@ class JustChatViewModel {
         }
     }
 
-    func viewDidDisappear() {
-        Container.shared.manager.didExitChat(id: chat.id)
+    func goToChatMembers() {
+        router.presentMembersList()
     }
 }

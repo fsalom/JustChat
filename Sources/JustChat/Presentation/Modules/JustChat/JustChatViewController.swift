@@ -100,6 +100,10 @@ public class JustChatViewController: UIViewController {
         stackView.addArrangedSubview(UIView())
 
         self.navigationItem.titleView = stackView
+
+        // Right button members
+        let membersButton = UIBarButtonItem(image: UIImage(systemName: "person.2"), style: .plain, target: self, action: #selector(membersButtonPressed))
+        self.navigationItem.rightBarButtonItem = membersButton
     }
 
     func setupBindings() {
@@ -144,6 +148,10 @@ public class JustChatViewController: UIViewController {
             tableView.contentInset.bottom = 55
             tableView.verticalScrollIndicatorInsets.bottom = 55
         }
+    }
+
+    @objc func membersButtonPressed() {
+        viewModel.goToChatMembers()
     }
 }
 
